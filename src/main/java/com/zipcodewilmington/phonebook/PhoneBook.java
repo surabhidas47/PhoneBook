@@ -27,7 +27,7 @@ public class PhoneBook {
         //this refers to phonebook.. the first constructor
         //while we are using a tree map.. the test is expecting a hashmap
         //our next step is to look at documentation of hashmap to see if there is some sort of conversation
-        this(new TreeMap<>());
+        this(new LinkedHashMap<>());
     }
 
     public void add(String name, String phoneNumber) {
@@ -64,8 +64,8 @@ public class PhoneBook {
     // they have to be different and have unique signatures
 
     public Boolean hasEntry(String name, String phoneNumbers) {
-        //boolen checking to see is in phone number is in the list
-        //contains part of arraylists
+        //boolean checking to see if phone number is in the list
+
         if (phonebook.containsKey(name) && phonebook.get(name).contains(phoneNumbers)) {
             return true;
         }
@@ -84,11 +84,24 @@ public class PhoneBook {
     }
 
     public String reverseLookup(String phoneNumber)  {
+        for (String key: phonebook.keySet()) {
+            //were doing same func as has been..
+            if (hasEntry(key, phoneNumber)){
+                //return name
+                return key;
+            }
+        }
+
         return null;
     }
 
     public List<String> getAllContactNames() {
-        return null;
+        ArrayList<String> arl = new ArrayList<>();
+        for (String naame: phonebook.keySet() ) {
+            //need to make a list bc returning a list as per test
+            arl.add(naame);
+        }
+        return arl;
     }
 
     public Map<String, List<String>> getMap() {
